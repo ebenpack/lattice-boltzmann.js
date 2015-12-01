@@ -1,4 +1,4 @@
-function boltzman(config) {
+function boltzmann(config) {
     var boltzcanvas = document.getElementById(config.boltzId);
     var vectorcanvas = document.getElementById(config.vectorcanvasId);
     var particlecanvas = document.getElementById(config.particlecanvasId);
@@ -1002,3 +1002,5 @@ function boltzman(config) {
 
     init();
 }
+
+module.exports = boltzmann;
