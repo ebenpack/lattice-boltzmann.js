@@ -106,7 +106,7 @@ function boltzmann(config) {
         flow_particles.length = 0;
         for (var y = 1; y < 8; y++) {
             for (var x = 1; x < 20; x++) {
-                if (!Lbarrier[(y * 10)*latticeWidth+(x * 10)]) {
+                if (!Lbarrier[(y * 10) * latticeWidth + (x * 10)]) {
                     flow_particles.push({
                         'x': x * 10,
                         'y': y * 10
@@ -126,8 +126,8 @@ function boltzmann(config) {
             var ly = Math.floor(p.y);
             if (lx >= 0 && lx < latticeWidth &&
                 ly >= 0 && ly < latticeHeight) {
-                var ux = Lux[ly*latticeWidth+lx];
-                var uy = Luy[ly*latticeWidth+lx];
+                var ux = Lux[ly * latticeWidth + lx];
+                var uy = Luy[ly * latticeWidth + lx];
                 p.x += ux;
                 p.y += uy;
             }
@@ -149,12 +149,12 @@ function boltzmann(config) {
             // Clear all
             for (y = 0; y < latticeHeight; y++) {
                 for (x = 0; x < latticeWidth; x++) {
-                    Lbarrier[y*latticeWidth+x] = 0;
+                    Lbarrier[y * latticeWidth + x] = 0;
                 }
             }
             // Set new barriers from barrier array
             for (var i = 0; i < barrier.length; i++) {
-                Lbarrier[barrier[i].y*latticeWidth+barrier[i].x] = 1;
+                Lbarrier[barrier[i].y * latticeWidth + barrier[i].x] = 1;
             }
         } else {
             // Default barrier setup
@@ -164,7 +164,7 @@ function boltzmann(config) {
                         y === 0 || y === latticeHeight - 1 ||
                         (Math.abs((latticeWidth / 2) - x) < 10 &&
                             Math.abs((latticeHeight / 2) - y) < 10)) {
-                        Lbarrier[y*latticeWidth+x] = 1;
+                        Lbarrier[y * latticeWidth + x] = 1;
                     }
                 }
             }
@@ -185,49 +185,49 @@ function boltzmann(config) {
         var temp8 = L8;
         var wid = latticeWidth;
         var hei = latticeHeight;
-        for (y=hei-2; y>0; y--) {
-            for (x=1; x<wid-1; x++) {
-                idx = y*wid+x;
-                temp2[idx] = temp2[(y-1)*wid+x];
-                temp6[idx] = temp6[(y-1)*wid+(x+1)];
+        for (y = hei - 2; y > 0; y--) {
+            for (x = 1; x < wid - 1; x++) {
+                idx = y * wid + x;
+                temp2[idx] = temp2[(y - 1) * wid + x];
+                temp6[idx] = temp6[(y - 1) * wid + (x + 1)];
             }
         }
-        
-        for (y=hei-2; y>0; y--) {
-            for (x=wid-2; x>0; x--) {
-                idx = y*wid+x;
-                temp1[idx] = temp1[y*wid+(x-1)];
-                temp5[idx] = temp5[(y-1)*wid+(x-1)];
+
+        for (y = hei - 2; y > 0; y--) {
+            for (x = wid - 2; x > 0; x--) {
+                idx = y * wid + x;
+                temp1[idx] = temp1[y * wid + (x - 1)];
+                temp5[idx] = temp5[(y - 1) * wid + (x - 1)];
             }
         }
-        
-        for (y=1; y<hei-1; y++) {
-            for (x=wid-2; x>0; x--) {
-                idx = y*wid+x;
-                temp4[idx] = temp4[(y+1)*wid+x];
-                temp8[idx] = temp8[(y+1)*wid+(x-1)];
+
+        for (y = 1; y < hei - 1; y++) {
+            for (x = wid - 2; x > 0; x--) {
+                idx = y * wid + x;
+                temp4[idx] = temp4[(y + 1) * wid + x];
+                temp8[idx] = temp8[(y + 1) * wid + (x - 1)];
             }
         }
-        
-        for (y=1; y<hei-1; y++) {
-            for (x=1; x<wid-1; x++) {
-                idx = y*wid+x;
-                temp3[idx] = temp3[y*wid+(x+1)];
-                temp7[idx] = temp7[(y+1)*wid+(x+1)];
+
+        for (y = 1; y < hei - 1; y++) {
+            for (x = 1; x < wid - 1; x++) {
+                idx = y * wid + x;
+                temp3[idx] = temp3[y * wid + (x + 1)];
+                temp7[idx] = temp7[(y + 1) * wid + (x + 1)];
             }
         }
-        for (y=1; y<hei-1; y++) {
-            for (x=1; x<wid-1; x++) {
-                idx = y*wid+x;
+        for (y = 1; y < hei - 1; y++) {
+            for (x = 1; x < wid - 1; x++) {
+                idx = y * wid + x;
                 if (Lbarrier[idx]) {
-                    temp1[(y  )*wid+(x+1)] = temp3[idx];
-                    temp2[(y+1)*wid+(x  )] = temp4[idx];
-                    temp3[(y  )*wid+(x-1)] = temp1[idx];
-                    temp4[(y-1)*wid+(x  )] = temp2[idx];
-                    temp5[(y+1)*wid+(x+1)] = temp7[idx];
-                    temp6[(y+1)*wid+(x-1)] = temp8[idx];
-                    temp7[(y-1)*wid+(x-1)] = temp5[idx];
-                    temp8[(y-1)*wid+(x+1)] = temp6[idx];
+                    temp1[(y) * wid + (x + 1)] = temp3[idx];
+                    temp2[(y + 1) * wid + (x)] = temp4[idx];
+                    temp3[(y) * wid + (x - 1)] = temp1[idx];
+                    temp4[(y - 1) * wid + (x)] = temp2[idx];
+                    temp5[(y + 1) * wid + (x + 1)] = temp7[idx];
+                    temp6[(y + 1) * wid + (x - 1)] = temp8[idx];
+                    temp7[(y - 1) * wid + (x - 1)] = temp5[idx];
+                    temp8[(y - 1) * wid + (x + 1)] = temp6[idx];
                 }
             }
         }
@@ -256,7 +256,7 @@ function boltzmann(config) {
         var hei = latticeHeight;
         for (var y = 1; y < hei - 1; y++) {
             for (var x = 1; x < wid - 1; x++) {
-                idx = y*wid+x;
+                idx = y * wid + x;
                 if (!tempbar[idx]) {
                     // Calculate macroscopic density (rho) and velocity (ux, uy)
                     // Thanks to Daniel V. Schroeder for this optimization
@@ -311,10 +311,10 @@ function boltzmann(config) {
                     if (draw_mode == 4 && x > 0 && x < wid - 1 &&
                         y > 0 && y < hei - 1) {
                         tempcurl[idx] = (
-                            tempuy[y*wid+(x + 1)] -
-                            tempuy[y*wid+(x - 1)] -
-                            tempux[(y + 1)*wid+x] +
-                            tempux[(y - 1)*wid+x]
+                            tempuy[y * wid + (x + 1)] -
+                            tempuy[y * wid + (x - 1)] -
+                            tempux[(y + 1) * wid + x] +
+                            tempux[(y - 1) * wid + x]
                         );
                     }
                     // Set node equilibrium for each velocity
@@ -384,7 +384,7 @@ function boltzmann(config) {
         var eight = one36th * rho * (1 + ux3 - uy3 + 4.5 * (u2 - uxuy2) - u215);
         for (var x = 0; x < latticeWidth - 1; x++) {
             idx1 = x;
-            idx2 = (latticeHeight - 1)*latticeWidth+x;
+            idx2 = (latticeHeight - 1) * latticeWidth + x;
             temp0[idx2] = temp0[idx1] = zero;
             temp1[idx2] = temp1[idx1] = one;
             temp2[idx2] = temp2[idx1] = two;
@@ -396,8 +396,8 @@ function boltzmann(config) {
             temp8[idx2] = temp8[idx1] = eight;
         }
         for (var y = 0; y < latticeHeight - 1; y++) {
-            idx1 = y*latticeWidth;
-            idx2 = y*latticeWidth+(latticeWidth - 1);
+            idx1 = y * latticeWidth;
+            idx2 = y * latticeWidth + (latticeWidth - 1);
             temp0[idx2] = temp0[idx1] = zero;
             temp1[idx2] = temp1[idx1] = one;
             temp2[idx2] = temp2[idx1] = two;
@@ -593,7 +593,7 @@ function boltzmann(config) {
     function draw_barriers() {
         for (var x = 0; x < latticeWidth; x++) {
             for (var y = 0; y < latticeHeight; y++) {
-                if (Lbarrier[y*latticeWidth+x]) {
+                if (Lbarrier[y * latticeWidth + x]) {
                     barrierctx.beginPath();
                     barrierctx.rect(x * px_per_node, y * px_per_node, px_per_node, px_per_node);
                     barrierctx.fill();
@@ -624,7 +624,7 @@ function boltzmann(config) {
         }
         for (x = 0; x < latticeWidth; x++) {
             for (y = 0; y < latticeHeight; y++) {
-                var idx = y*latticeWidth+x;
+                var idx = y * latticeWidth + x;
                 var color_index;
                 if (!Lbarrier[idx]) {
                     // var color = {'r': 0, 'g': 0, 'b': 0, 'a': 0};
@@ -702,6 +702,55 @@ function boltzmann(config) {
     var flowvector;
     var flowparticle;
 
+    function moveHelper(newX, newY, oldX, oldY) {
+        var radius = 5;
+        var dx = (newX - oldX) / px_per_node / steps_per_frame;
+        var dy = (newY - oldY) / px_per_node / steps_per_frame;
+        // Ensure that push isn't too big
+        if (Math.abs(dx) > 0.1) {
+            dx = 0.1 * Math.abs(dx) / dx;
+        }
+        if (Math.abs(dy) > 0.1) {
+            dy = 0.1 * Math.abs(dy) / dy;
+        }
+        // Scale from canvas coordinates to lattice coordinates
+        var lattice_x = Math.floor(newX / px_per_node);
+        var lattice_y = Math.floor(newY / px_per_node);
+        for (var x = -radius; x <= radius; x++) {
+            for (var y = -radius; y <= radius; y++) {
+                // Push in circle around cursor. Make sure coordinates are in bounds.
+                if (lattice_x + x >= 0 && lattice_x + x < latticeWidth &&
+                    lattice_y + y >= 0 && lattice_y + y < latticeHeight &&
+                    !Lbarrier[(lattice_y + y) * latticeWidth + (lattice_x + x)] &&
+                    Math.sqrt((x * x) + (y * y)) < radius) {
+                    var idx = (lattice_y + y) * latticeWidth + (lattice_x + x);
+                    var ux = dx;
+                    var uy = dy;
+                    var rho = Ldensity[idx];
+                    var ux3 = 3 * ux;
+                    var uy3 = 3 * -uy;
+                    var ux2 = ux * ux;
+                    var uy2 = -uy * -uy;
+                    var uxuy2 = 2 * ux * -uy;
+                    var u2 = ux2 + uy2;
+                    var u215 = 1.5 * u2;
+                    L0[idx] = four9ths * rho * (1 - u215);
+                    L1[idx] = one9th * rho * (1 + ux3 + 4.5 * ux2 - u215);
+                    L2[idx] = one9th * rho * (1 + uy3 + 4.5 * uy2 - u215);
+                    L3[idx] = one9th * rho * (1 - ux3 + 4.5 * ux2 - u215);
+                    L4[idx] = one9th * rho * (1 - uy3 + 4.5 * uy2 - u215);
+                    L5[idx] = one36th * rho * (1 + ux3 + uy3 + 4.5 * (u2 + uxuy2) - u215);
+                    L6[idx] = one36th * rho * (1 - ux3 + uy3 + 4.5 * (u2 - uxuy2) - u215);
+                    L7[idx] = one36th * rho * (1 - ux3 - uy3 + 4.5 * (u2 + uxuy2) - u215);
+                    L8[idx] = one36th * rho * (1 + ux3 - uy3 + 4.5 * (u2 - uxuy2) - u215);
+                }
+            }
+        }
+        oldX = newX;
+        oldY = newY;
+    }
+
+
     /**
      * Push fluid with mouse 
      * @param {Object} e MouseEvent 'mousedown'
@@ -722,51 +771,9 @@ function boltzmann(config) {
          * @param {Object} e MouseEvent 'mousemove'
          */
         function moveListener(e) {
-            var radius = 5;
             var newX = e.hasOwnProperty('offsetX') ? e.offsetX : e.layerX;
             var newY = e.hasOwnProperty('offsetY') ? e.offsetY : e.layerY;
-            var dx = (newX - oldX) / px_per_node / steps_per_frame;
-            var dy = (newY - oldY) / px_per_node / steps_per_frame;
-            // Ensure that push isn't too big
-            if (Math.abs(dx) > 0.1) {
-                dx = 0.1 * Math.abs(dx) / dx;
-            }
-            if (Math.abs(dy) > 0.1) {
-                dy = 0.1 * Math.abs(dy) / dy;
-            }
-            // Scale from canvas coordinates to lattice coordinates
-            var lattice_x = Math.floor(newX / px_per_node);
-            var lattice_y = Math.floor(newY / px_per_node);
-            for (var x = -radius; x <= radius; x++) {
-                for (var y = -radius; y <= radius; y++) {
-                    // Push in circle around cursor. Make sure coordinates are in bounds.
-                    if (lattice_x + x >= 0 && lattice_x + x < latticeWidth &&
-                        lattice_y + y >= 0 && lattice_y + y < latticeHeight &&
-                        !Lbarrier[(lattice_y + y)*latticeWidth+(lattice_x + x)] &&
-                        Math.sqrt((x * x) + (y * y)) < radius) {
-                        var idx = (lattice_y + y)*latticeWidth+(lattice_x + x);
-                        var ux = dx;
-                        var uy = dy;
-                        var rho = Ldensity[idx];
-                        var ux3 = 3 * ux;
-                        var uy3 = 3 * -uy;
-                        var ux2 = ux * ux;
-                        var uy2 = -uy * -uy;
-                        var uxuy2 = 2 * ux * -uy;
-                        var u2 = ux2 + uy2;
-                        var u215 = 1.5 * u2;
-                        L0[idx] = four9ths * rho * (1 - u215);
-                        L1[idx] = one9th * rho * (1 + ux3 + 4.5 * ux2 - u215);
-                        L2[idx] = one9th * rho * (1 + uy3 + 4.5 * uy2 - u215);
-                        L3[idx] = one9th * rho * (1 - ux3 + 4.5 * ux2 - u215);
-                        L4[idx] = one9th * rho * (1 - uy3 + 4.5 * uy2 - u215);
-                        L5[idx] = one36th * rho * (1 + ux3 + uy3 + 4.5 * (u2 + uxuy2) - u215);
-                        L6[idx] = one36th * rho * (1 - ux3 + uy3 + 4.5 * (u2 - uxuy2) - u215);
-                        L7[idx] = one36th * rho * (1 - ux3 - uy3 + 4.5 * (u2 + uxuy2) - u215);
-                        L8[idx] = one36th * rho * (1 + ux3 - uy3 + 4.5 * (u2 - uxuy2) - u215);
-                    }
-                }
-            }
+            moveHelper(newX, newY, oldX, oldY);
             oldX = newX;
             oldY = newY;
         }
@@ -801,7 +808,7 @@ function boltzmann(config) {
         var lattice_x = Math.floor(mouse_x / px_per_node);
         var lattice_y = Math.floor(mouse_y / px_per_node);
         var draw;
-        var idx = lattice_y*latticeWidth+lattice_x;
+        var idx = lattice_y * latticeWidth + lattice_x;
         // Bitflip the barrier
         draw = Lbarrier[idx] = Lbarrier[idx] ^ 1;
 
@@ -816,7 +823,7 @@ function boltzmann(config) {
             lattice_x = Math.floor(mouse_x / px_per_node);
             lattice_y = Math.floor(mouse_y / px_per_node);
             // Draw/erase barrier
-            Lbarrier[lattice_y*latticeWidth+lattice_x] = draw;
+            Lbarrier[lattice_y * latticeWidth + lattice_x] = draw;
             new_barrier = true;
             if (!animation_id) {
                 // If stopped, we need to explicitly call drawFrame()
@@ -842,6 +849,48 @@ function boltzmann(config) {
         boltzcanvas.addEventListener('touchmove', moveListener, false);
         document.body.addEventListener('touchend', mouseupListener, false);
     }
+
+
+    var touches = {};
+    var rect = boltzcanvas.getBoundingClientRect();
+
+    function touchdownListener(e) {
+        var started = e.changedTouches;
+        for (var i = 0, len = started.length; i < len; i++) {
+            touches[started[i].identifier + '.x'] = started[i].clientX - rect.left;
+            touches[started[i].identifier + '.y'] = started[i].clientY - rect.top;
+        }
+    }
+    /**
+     * Push fluid with finger
+     * @param {Object} e MouseEvent 'touchmove'
+     */
+    function touchMoveListener(e) {
+        e.preventDefault();
+        var moved = e.changedTouches;
+        for (var i = 0, len = moved.length; i < len; i++) {
+            var oldX = touches[moved[i].identifier + '.x'];
+            var oldY = touches[moved[i].identifier + '.y'];
+            var newX = moved[i].clientX - rect.left;
+            var newY = moved[i].clientY - rect.top;
+            moveHelper(newX, newY, oldX, oldY);
+            touches[moved[i].identifier + '.x'] = newX;
+            touches[moved[i].identifier + '.y'] = newY;
+        }
+    }
+    /**
+     * Remove mousemove listeners
+     * @param {Object} e MouseEvent 'mouseup'
+     */
+    function touchupListener(e) {
+        var ended = e.changedTouches;
+        for (var i = 0, len = ended.length; i < 0; i++) {
+            delete touches[ended[i].identifier + '.x'];
+            delete touches[ended[i].identifier + '.y'];
+        }
+    }
+    boltzcanvas.addEventListener('touchmove', touchMoveListener, false);
+    document.body.addEventListener('touchend', touchupListener, false);
 
     /**
      * Change draw mode.
@@ -969,7 +1018,7 @@ function boltzmann(config) {
     (function register() {
         // Register left click
         boltzcanvas.addEventListener('mousedown', mousedownListener, false);
-        boltzcanvas.addEventListener('touchstart', mousedownListener, false);
+        boltzcanvas.addEventListener('touchstart', touchdownListener, false);
         // Register right click 
         boltzcanvas.addEventListener('contextmenu', place_barrier, false);
         // Register dropdown
