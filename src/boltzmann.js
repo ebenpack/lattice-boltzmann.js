@@ -63,7 +63,7 @@ function boltzmann(config) {
         Ldensity = new Array(size);
         Lux = new Array(size);
         Luy = new Array(size);
-        Lbarrier = new Uint8Array(size);
+        Lbarrier = new Array(size);
         Lcurl = new Array(size);
     }
 
