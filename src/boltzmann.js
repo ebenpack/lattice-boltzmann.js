@@ -1026,4 +1026,4 @@ function boltzmann(config) {
     init();
 }
 
-// module.exports = boltzmann;
+module.exports = boltzmann;
